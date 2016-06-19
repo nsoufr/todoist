@@ -1,10 +1,10 @@
 # Todoist
 
-**TODO: Add description**
+Simple Todoist Elixir wrapper
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
+If [available in Hex](https://hexdocs.pm/todoist/0.0.1), the package can be installed as:
 
   1. Add todoist to your list of dependencies in `mix.exs`:
 
