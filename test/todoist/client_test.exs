@@ -4,8 +4,8 @@ defmodule Todoist.ClientTest do
 
   doctest Todoist.Client
 
-  test "default construction" do
-    cli = Client.new(%{access_token: "xxx"})
-    assert cli.access_token == "xxx"
+  test "get_token" do
+    {:ok, cli} = Client.new("xxxxxx")
+    assert "xxxxxx" == Client.get_token(cli)
   end
 end
