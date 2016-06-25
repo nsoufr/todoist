@@ -1,6 +1,6 @@
 # Todoist
 
-Simple Todoist Elixir wrapper
+Simple Elixir wrapper for the [Todoist API](http://developer.todoist.com)
 
 ## Installation
 
@@ -18,3 +18,9 @@ If [available in Hex](https://hexdocs.pm/todoist/0.0.1), the package can be inst
           [applications: [:todoist]]
         end
 
+## Usage
+
+### Sync 
+        {:ok, client} = Todoist.Client.new("<YOUR_ACCESS_TOKEN>")
+        request = Todoist.ReadRequest(resource_types: ["projects"])
+        response = Todoist.sync(client, request)
