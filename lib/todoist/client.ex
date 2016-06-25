@@ -1,5 +1,6 @@
 defmodule Todoist.Client do
   use GenServer
+  alias Todoist.Request
 
   defstruct access_token: nil
 
@@ -28,7 +29,7 @@ defmodule Todoist.Client do
 
   def handle_call({:do_request, request}, _from, state) do
     request_query = request |> Map.put(:token, state.access_token)
-                            |> Todoist.Request.parse
+                            |> Request.parse
 
     url = "#{@endpoint}?#{request_query}"
     response =  HTTPotion.post(url)

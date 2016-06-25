@@ -1,21 +1,12 @@
 defprotocol Todoist.Request do
-  def parse(item)
+  def parse(request)
 end
 
 defimpl Todoist.Request, for: Todoist.ReadRequest do
-  def parse(item) do
-
-    check_nil = fn(x) ->
-                  case x do
-                   {_, nil} -> true
-                   {_,_} -> false
-                  end
-                end
-
-    item |> Map.from_struct
-         |> Map.update!(:resource_types, &(Poison.Encoder.encode(&1, []) |> List.to_string ))
-         |> Enum.reject(check_nil)
-         |> IO.inspect
-         |> URI.encode_query
+  def parse(request) do
+    request |> Map.from_struct
+            |> Map.update!(:resource_types, &(inspect(&1)))
+            |> Enum.filter(&elem(&1, 1))
+            |> URI.encode_query
   end
 end

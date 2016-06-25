@@ -47,6 +47,8 @@ defmodule Todoist.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [{:ex_doc, ">= 0.0.0", only: :dev},
-     {:httpotion, "~> 3.0.0"}, {:poison, "~> 2.0"}]
+     {:exvcr, "~> 0.7", only: :test},
+     {:httpotion, "~> 2.2.2"},
+     {:poison, "~> 2.0"}]
   end
 end

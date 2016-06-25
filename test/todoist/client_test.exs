@@ -4,7 +4,7 @@ defmodule Todoist.ClientTest do
 
   doctest Todoist.Client
 
-  test "get_token" do
+  test "get_token/1" do
     {:ok, cli} = Client.new("xxxxxx")
     assert "xxxxxx" == Client.get_token(cli)
   end
