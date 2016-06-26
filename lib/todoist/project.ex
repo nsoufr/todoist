@@ -17,13 +17,17 @@ defmodule Todoist.Project do
     uuid    = Keyword.get(options, :uuid, UUID.uuid1())
     temp_id = Keyword.get(options, :temp_id, uuid)
 
-    args = options |> Keyword.drop([:uuid, :temp_id])
-                   |> Keyword.put(:name, name)
-                   |> Enum.into(%{})
-
+    args = process_args(name, options)
     cmd = %{type: "project_add", args: args} |> Map.put(:uuid, uuid)
                                              |> Map.put(:temp_id, temp_id)
 
     request |> Map.update!(:commands, &(List.insert_at(&1, -1, cmd)))
+  end
+
+  @spec process_args(binary, Keyword.t) :: map
+  defp process_args(name, options) do
+    options |> Keyword.drop([:uuid, :temp_id])
+            |> Keyword.put(:name, name)
+            |> Enum.into(%{})
   end
 end
