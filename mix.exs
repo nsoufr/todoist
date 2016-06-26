@@ -48,6 +48,7 @@ defmodule Todoist.Mixfile do
   defp deps do
     [{:ex_doc, ">= 0.0.0", only: :dev},
      {:exvcr, "~> 0.7", only: :test},
+     {:uuid, "~> 1.1"},
      {:httpotion, "~> 2.2.2"},
      {:poison, "~> 2.0"}]
   end
