@@ -18,4 +18,11 @@ defmodule Todoist.Integration.ProjectTest do
       assert %{"sync_status" => %{"project_add"=> "ok" }} = Todoist.sync(client, request)
     end
   end
+
+  test "updating a project", %{client: client, request: request} do
+    use_cassette "project#update" do
+      request =  Project.update(request, "project_add", name: "My new name", uuid: "project_update_test")
+      assert %{"sync_status" => %{"project_update_test" => "ok" }} = Todoist.sync(client, request)
+    end
+  end
 end
