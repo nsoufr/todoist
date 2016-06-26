@@ -61,7 +61,7 @@ defmodule Todoist.Project do
     * `:collapsed` Whether the project’s sub-projects are collapsed.
       (where 1 is true and 0 is false)
 
-    # Examples
+  # Examples
       request = %WriteRequest |> update("id", name: "new title")
       request.commands
       [%{type: "project_update", uuid: ..., args: %{id: "id", name: "new_title"}}]
@@ -84,9 +84,9 @@ defmodule Todoist.Project do
   generated if not passed.
 
   # Examples
-  request = %WriteRequest |> delete(["temp_id"])
-  request.commands
-  [%{type: "project_delete", uuid: ..., args: %{ids: ["temp_id"}}]
+      request = %WriteRequest |> delete(["temp_id"])
+      request.commands
+      [%{type: "project_delete", uuid: ..., args: %{ids: ["temp_id"}}]
   """
 
   def delete(request, ids, options \\ [])
@@ -113,9 +113,9 @@ defmodule Todoist.Project do
     generated if not passed.
 
   # Examples
-    request = %WriteRequest |> archive(["temp_id"])
-    request.commands
-    [%{type: "project_archive", uuid: ..., args: %{ids: ["temp_id"}}]
+      request = %WriteRequest |> archive(["temp_id"])
+      request.commands
+      [%{type: "project_archive", uuid: ..., args: %{ids: ["temp_id"}}]
   """
 
   def archive(request, ids, options \\ [])
@@ -141,9 +141,9 @@ defmodule Todoist.Project do
     generated if not passed.
 
   # Examples
-    request = %WriteRequest |> unarchive(["temp_id"])
-    request.commands
-    [%{type: "project_unarchive", uuid: ..., args: %{ids: ["temp_id"}}]
+      request = %WriteRequest |> unarchive(["temp_id"])
+      request.commands
+      [%{type: "project_unarchive", uuid: ..., args: %{ids: ["temp_id"}}]
   """
 
   def unarchive(request, ids, options \\ [])
