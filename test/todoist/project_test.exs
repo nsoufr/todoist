@@ -44,4 +44,10 @@ defmodule Todoist.ProjectTest do
     assert [%{type: "project_unarchive", args: %{ids: ["project_test"]}}] =
       request.commands
   end
+
+  test "update_orders_indents", %{request: request} do
+    request = request |> update_orders_indents(%{"1923440" => [42, 1]})
+    assert [%{type: "project_update_orders_indents", args: %{"ids_to_orders_indents" => %{"1923440" => [42,1]}}}] =
+      request.commands
+  end
 end

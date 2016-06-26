@@ -130,4 +130,22 @@ defmodule Todoist.Project do
 
   @spec unarchive(Todoist.WriteRequest.t, integer | binary | atom, Keyword.t) :: Todoist.WriteRequest.t
   def unarchive(request, id, options), do: unarchive(request, [id], options)
+
+  @doc """
+  Adds an update_orders_indent command strcuture to Request
+
+  See: https://developer.todoist.com/?shell#update-multiple-ordersindents
+
+  Options:
+    * `:uuid` Unique string ID for the command: It will be automatically
+    generated if not passed.
+  """
+
+  @spec update_orders_indents(Todoist.WriteRequest.t, map, Keyword.t) :: Todoist.WriteRequest.t
+  def update_orders_indents(request, order_info, options \\ []) do
+    cmd = Command.build_from_opts("project_update_orders_indents", options)
+    cmd = Command.put_arg(cmd, "ids_to_orders_indents", order_info)
+
+    WriteRequest.add_command(request, cmd)
+  end
 end
