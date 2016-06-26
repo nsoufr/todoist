@@ -11,9 +11,9 @@ defmodule Todoist do
       iex> sync(cli, request)
       %{"items" => ...}
   """
-  @spec sync(Todoist.Client.t, Todoist.Request.t) :: map
-  def sync(cli, request) do
-    response = do_request(cli, request)
+  @spec sync(Todoist.Request.t, Todoist.Client.t) :: map
+  def sync(request, client) do
+    response = do_request(client, request)
     json(response.body)
   end
 
