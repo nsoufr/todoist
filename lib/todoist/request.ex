@@ -10,3 +10,11 @@ defimpl Todoist.Request, for: Todoist.ReadRequest do
             |> URI.encode_query
   end
 end
+
+defimpl Todoist.Request, for: Todoist.WriteRequest do
+  def parse(request) do
+    request |> Map.from_struct
+            |> Map.update!(:commands, &(Poison.encode!(&1)))
+            |> URI.encode_query
+  end
+end

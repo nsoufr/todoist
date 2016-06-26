@@ -10,11 +10,13 @@ defmodule Todoist.Project do
       iex> alias Todoist.Project
       iex> request = %Todoist.WriteRequest{} |> Project.add("my_new_project")
       iex> request.commands
-      [%{type: "project_add", args: [name: "my_new_project"]}]
+      [%{type: "project_add", args: %{name: "my_new_project"}}]
   """
   @spec add(Todoist.WriteRequest.t, binary, Keyword.t) :: Todoist.WriteRequest.t
   def add(request, name, options \\ []) do
     args = options |> Keyword.put(:name, name)
+                   |> Enum.into(%{})
+
     cmd = %{type: "project_add", args: args}
     request |> Map.update!(:commands, &(List.insert_at(&1, -1, cmd)))
   end
