@@ -5,9 +5,19 @@ defmodule Todoist.ProjectTest do
   import Todoist.Project
   alias Todoist.WriteRequest
 
-  test "add/3" do
-    request = %WriteRequest{} |> add("my_new_project")
-    assert [%{type: "project_add", uuid: _, args: %{name: "my_new_project"}}] =
+  setup do
+    {:ok, request: %WriteRequest{}}
+  end
+
+  test "add/3", %{request: request} do
+    request = request |> add("my_new_project")
+    assert [%{type: "project_add", args: %{name: "my_new_project"}}] =
+      request.commands
+  end
+
+  test "update/3", %{request: request} do
+    request = request |> update("project_test", name: "new_name")
+    assert [%{type: "project_update", args: %{id: "project_test", name: "new_name"}}] =
       request.commands
   end
 end
