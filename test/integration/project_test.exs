@@ -41,4 +41,11 @@ defmodule Todoist.Integration.ProjectTest do
       assert %{"sync_status" => %{"project_unarchive_test" => "ok"}} = sync(client, request)
     end
   end
+
+  test "deleting a project", %{client: client, request: request} do
+    use_cassette "project#delete" do
+      request = Project.delete(request, "project_add", uuid: "project_delete_test")
+      assert %{"sync_status" => %{"project_delete_test" => "ok"}} = sync(client, request)
+    end
+  end
 end

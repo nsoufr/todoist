@@ -50,4 +50,10 @@ defmodule Todoist.ProjectTest do
     assert [%{type: "project_update_orders_indents", args: %{"ids_to_orders_indents" => %{"1923440" => [42,1]}}}] =
       request.commands
   end
+
+  test "delete/3 when list", %{request: request} do
+    request = request |> delete("project_test")
+    assert [%{type: "project_delete", args: %{ids: ["project_test"]}}] =
+      request.commands
+  end
 end

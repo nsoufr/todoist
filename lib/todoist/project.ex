@@ -75,6 +75,35 @@ defmodule Todoist.Project do
   end
 
   @doc """
+  Adds an delete command structure to Request
+
+  See: https://developer.todoist.com/#delete-projects
+
+  Options:
+  * `:uuid` Unique string ID for the command: It will be automatically
+  generated if not passed.
+
+  # Examples
+  request = %WriteRequest |> delete(["temp_id"])
+  request.commands
+  [%{type: "project_delete", uuid: ..., args: %{ids: ["temp_id"}}]
+  """
+
+  def delete(request, ids, options \\ [])
+
+  @spec delete(Todoist.WriteRequest.t, list, Keyword.t) :: Todoist.WriteRequest.t
+  def delete(request, ids, options) when is_list(ids) do
+    cmd = Command.build_from_opts("project_delete", options)
+    cmd = Command.put_arg(cmd, :ids, ids)
+
+    WriteRequest.add_command(request, cmd)
+  end
+
+  @spec delete(Todoist.WriteRequest.t, integer | binary | atom, Keyword.t) :: Todoist.WriteRequest.t
+  def delete(request, id, options), do: delete(request, [id], options)
+
+
+  @doc """
   Adds an archive command structure to Request
 
   See: https://developer.todoist.com/#archive-a-project
@@ -101,7 +130,6 @@ defmodule Todoist.Project do
 
   @spec archive(Todoist.WriteRequest.t, integer | binary | atom, Keyword.t) :: Todoist.WriteRequest.t
   def archive(request, id, options), do: archive(request, [id], options)
-
 
   @doc """
   Adds an unarchive command structure to Request
