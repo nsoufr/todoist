@@ -34,4 +34,11 @@ defmodule Todoist.Integration.ProjectTest do
       assert %{"sync_status" => %{"project_archive_test" => "ok"}} = sync(client, request)
     end
   end
+
+  test "unarchiving a project", %{client: client, request: request} do
+    use_cassette "project#unarchive" do
+      request = Project.unarchive(request, "project_add", uuid: "project_unarchive_test")
+      assert %{"sync_status" => %{"project_unarchive_test" => "ok"}} = sync(client, request)
+    end
+  end
 end

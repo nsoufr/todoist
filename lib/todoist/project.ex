@@ -101,4 +101,33 @@ defmodule Todoist.Project do
 
   @spec archive(Todoist.WriteRequest.t, integer | binary | atom, Keyword.t) :: Todoist.WriteRequest.t
   def archive(request, id, options), do: archive(request, [id], options)
+
+
+  @doc """
+  Adds an unarchive command structure to Request
+
+  See: https://developer.todoist.com/#unarchive-a-project
+
+  Options:
+    * `:uuid` Unique string ID for the command: It will be automatically
+    generated if not passed.
+
+  # Examples
+    request = %WriteRequest |> unarchive(["temp_id"])
+    request.commands
+    [%{type: "project_unarchive", uuid: ..., args: %{ids: ["temp_id"}}]
+  """
+
+  def unarchive(request, ids, options \\ [])
+
+  @spec unarchive(Todoist.WriteRequest.t, list, Keyword.t) :: Todoist.WriteRequest.t
+  def unarchive(request, ids, options) when is_list(ids) do
+    cmd = Command.build_from_opts("project_unarchive", options)
+    cmd = Command.put_arg(cmd, :ids, ids)
+
+    WriteRequest.add_command(request, cmd)
+  end
+
+  @spec unarchive(Todoist.WriteRequest.t, integer | binary | atom, Keyword.t) :: Todoist.WriteRequest.t
+  def unarchive(request, id, options), do: unarchive(request, [id], options)
 end
