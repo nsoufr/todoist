@@ -62,9 +62,9 @@ defmodule Todoist.Project do
       (where 1 is true and 0 is false)
 
     # Examples
-      request = %WriteRequest |> update("my_project_id_or_temp_id")
+      request = %WriteRequest |> update("id", name: "new title")
       request.commands
-      [%{type}]
+      [%{type: "project_update", uuid: ..., args: %{id: "id", name: "new_title"}}]
   """
   @spec update(Todoist.WriteRequest.t, binary | integer, Keyword.t) :: Todoist.WriteRequest.t
   def update(request, id, options \\ []) do
@@ -73,4 +73,32 @@ defmodule Todoist.Project do
 
     WriteRequest.add_command(request, cmd)
   end
+
+  @doc """
+  Adds an archive command structure to Request
+
+  See: https://developer.todoist.com/#archive-a-project
+
+  Options:
+    * `:uuid` Unique string ID for the command: It will be automatically
+    generated if not passed.
+
+  # Examples
+    request = %WriteRequest |> archive(["temp_id"])
+    request.commands
+    [%{type: "project_archive", uuid: ..., args: %{ids: ["temp_id"}}]
+  """
+
+  def archive(request, ids, options \\ [])
+
+  @spec archive(Todoist.WriteRequest.t, list, Keyword.t) :: Todoist.WriteRequest.t
+  def archive(request, ids, options) when is_list(ids) do
+    cmd = Command.build_from_opts("project_archive", options)
+    cmd = Command.put_arg(cmd, :ids, ids)
+
+    WriteRequest.add_command(request, cmd)
+  end
+
+  @spec archive(Todoist.WriteRequest.t, integer | binary | atom, Keyword.t) :: Todoist.WriteRequest.t
+  def archive(request, id, options), do: archive(request, [id], options)
 end

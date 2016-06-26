@@ -1,0 +1,28 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": [],
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "https://todoist.com/API/v7/sync?commands=%5B%7B%22uuid%22%3A%22project_archive_test%22%2C%22type%22%3A%22project_archive%22%2C%22temp_id%22%3A%22project_archive_test%22%2C%22args%22%3A%7B%22ids%22%3A%5B%22project_add%22%5D%7D%7D%5D&token=ACCESS_TOKEN"
+    },
+    "response": {
+      "body": "{\"seq_no_global\":7498935021,\"sync_status\":{\"project_archive_test\":\"ok\"},\"temp_id_mapping\":{\"project_add\":173909533},\"seq_no\":7498935021}",
+      "headers": {
+        "Cache-Control": "no-cache",
+        "Content-Type": "application/json",
+        "Date": "Sun, 26 Jun 2016 19:09:09 GMT",
+        "P3p": "policyref=\"/static/p3p.xml\", CP=\"IDC DSP COR IVAi IVDi OUR TST\"",
+        "Server": "nginx",
+        "Set-Cookie": "csrf=324aba147e4740f481a6b5c70086bd64; Expires=Wed, 24-Jun-2026 19:09:09 GMT; Secure; Path=/",
+        "Strict-Transport-Security": "max-age=10886400; includeSubDomains; preload",
+        "Content-Length": "136",
+        "Connection": "keep-alive"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

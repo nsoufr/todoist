@@ -5,6 +5,8 @@ defmodule Todoist.Integration.ProjectTest do
   alias Todoist.WriteRequest
   alias Todoist.Project
 
+  import Todoist
+
   setup_all do
     HTTPotion.start
 
@@ -15,14 +17,21 @@ defmodule Todoist.Integration.ProjectTest do
   test "adding a project", %{client: client, request: request} do
     use_cassette "project#add" do
       request = request |> Project.add("my_test_project", uuid: "project_add", temp_id: "project_add")
-      assert %{"sync_status" => %{"project_add"=> "ok" }} = Todoist.sync(client, request)
+      assert %{"sync_status" => %{"project_add"=> "ok" }} = sync(client, request)
     end
   end
 
   test "updating a project", %{client: client, request: request} do
     use_cassette "project#update" do
-      request =  Project.update(request, "project_add", name: "My new name", uuid: "project_update_test")
-      assert %{"sync_status" => %{"project_update_test" => "ok" }} = Todoist.sync(client, request)
+      request = Project.update(request, "project_add", name: "My new name", uuid: "project_update_test")
+      assert %{"sync_status" => %{"project_update_test" => "ok" }} = sync(client, request)
+    end
+  end
+
+  test "archiving a project", %{client: client, request: request} do
+    use_cassette "project#archive" do
+      request = Project.archive(request, "project_add", uuid: "project_archive_test")
+      assert %{"sync_status" => %{"project_archive_test" => "ok"}} = sync(client, request)
     end
   end
 end

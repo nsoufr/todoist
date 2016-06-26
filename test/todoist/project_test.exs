@@ -20,4 +20,16 @@ defmodule Todoist.ProjectTest do
     assert [%{type: "project_update", args: %{id: "project_test", name: "new_name"}}] =
       request.commands
   end
+
+  test "archive/2 when list", %{request: request} do
+    request = request |> archive(["project_test"])
+    assert [%{type: "project_archive", args: %{ids: ["project_test"]}}] =
+      request.commands
+  end
+
+  test "archive/2",  %{request: request} do
+    request = request |> archive("project_test")
+    assert [%{type: "project_archive", args: %{ids: ["project_test"]}}] =
+      request.commands
+  end
 end
