@@ -7,7 +7,7 @@ defmodule Todoist.ProjectTest do
 
   test "add/3" do
     request = %WriteRequest{} |> add("my_new_project")
-    cmd = %{type: "project_add", args: %{name: "my_new_project"}}
-    assert [^cmd] = request.commands
+    assert [%{type: "project_add", uuid: _, args: %{name: "my_new_project"}}] =
+      request.commands
   end
 end

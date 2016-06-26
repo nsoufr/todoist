@@ -21,9 +21,8 @@ defmodule Todoist.Request.WriteRequest do
   doctest Todoist.Request
 
   test "parse/1" do
-    request = %WriteRequest{} |> Project.add("my_new_project")
-
-    expected_command = "[{\"type\":\"project_add\",\"args\":{\"name\":\"my_new_project\"}}]"
-    assert %{"commands" => expected_command } == URI.decode_query(parse(request))
+    request = %WriteRequest{} |> Project.add("my_new_project", uuid: "uuid-test")
+    cmd = "[{\"uuid\":\"uuid-test\",\"type\":\"project_add\",\"temp_id\":\"uuid-test\",\"args\":{\"name\":\"my_new_project\"}}]"
+    assert %{"commands" => cmd } == URI.decode_query(parse(request))
   end
 end
