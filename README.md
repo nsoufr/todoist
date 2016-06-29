@@ -1,4 +1,5 @@
 # Todoist
+[![Build Status](https://travis-ci.org/nandosousafr/todoist.svg?branch=master)](https://travis-ci.org/nandosousafr/todoist)
 
 Simple Elixir wrapper for the [Todoist API](http://developer.todoist.com)
 
