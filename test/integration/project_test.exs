@@ -8,8 +8,6 @@ defmodule Todoist.Integration.ProjectTest do
   import Todoist
 
   setup_all do
-    HTTPotion.start
-
     {:ok, client} = Todoist.Client.new(System.get_env("TODOIST_ACCESS_TOKEN"))
     {:ok, client: client, request: %WriteRequest{}}
   end

@@ -32,7 +32,7 @@ defmodule Todoist.Client do
                             |> Request.parse
 
     url = "#{@endpoint}?#{request_query}"
-    response =  HTTPotion.post(url)
+    response = Tesla.post(url, "data", headers: [{"content-type", "application/json"}])
     {:reply, response, state}
   end
 end
