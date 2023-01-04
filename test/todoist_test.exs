@@ -4,10 +4,6 @@ defmodule TodoistTest do
 
   import Todoist
 
-  setup_all do
-    HTTPotion.start
-  end
-
   test "sync/2" do
     use_cassette "sync" do
       {:ok, client} = Todoist.Client.new(System.get_env("TODOIST_ACCESS_TOKEN"))

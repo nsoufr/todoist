@@ -16,7 +16,7 @@ defmodule Todoist.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger, :httpotion]]
+    [applications: [:logger, :tesla]]
   end
 
   defp description do
@@ -49,7 +49,7 @@ defmodule Todoist.Mixfile do
     [{:ex_doc, ">= 0.0.0", only: :dev},
      {:exvcr, "~> 0.7", only: :test},
      {:uuid, "~> 1.1"},
-     {:httpotion, "~> 2.2.2"},
+     {:tesla,  "1.5.0"},
      {:poison, "~> 2.0"}]
   end
 end
